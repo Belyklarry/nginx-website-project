@@ -10,7 +10,7 @@ pipeline {
 
     stage('Checkout') {
         steps {
-            git branch: 'master', credentialsId: 'Github', url: 'git@github.com:Belyklarry/nginx-website-project.git'
+            git branch: 'master', credentialsId: 'local_auth', url: 'git@github.com:Belyklarry/nginx-website-project.git'
         }
     }
 
@@ -19,10 +19,10 @@ pipeline {
         script {
           if (params.Action == "apply") {
             sh 'terraform init -chdir=terraform/static-site'
-            sh 'terraform apply -var "name=hello" -var "group=web" -var "region=us-east-1" -var "profile=scottyfullstack" --auto-approve -chdir=terraform/static-site'
+            sh 'terraform apply -var "name=hello" -var "group=web" -var "region=af-south-1" -var "profile=scottyfullstack" --auto-approve -chdir=terraform/static-site'
           } 
           else {
-            sh 'terraform destroy -var "name=hello" -var "group=web" -var "region=us-east-1" -var "profile=scottyfullstack" --auto-approve -chdir=terraform/static-site'
+            sh 'terraform destroy -var "name=hello" -var "group=web" -var "region=af-south-1" -var "profile=scottyfullstack" --auto-approve -chdir=terraform/static-site'
           }
         }
       }
